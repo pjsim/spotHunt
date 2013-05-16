@@ -1,4 +1,7 @@
 Meetspace::Application.routes.draw do
+  resources :venues
+
+
   authenticated :user do
     root :to => 'home#index'
   end

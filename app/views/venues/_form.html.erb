@@ -1,0 +1,16 @@
+<%= simple_form_for(@venue) do |f| %>
+  <%= f.error_notification %>
+
+    <%= f.input :name, :label => "Business name" %>
+    <%= f.input :location, :label => "Address" %>
+    <%= f.input :avatar, :label => "Image", :as => :file %>
+    <%= f.input :about, :input_html => { :rows => 10 } %>
+    <%= f.input :manager, :label => "Manger's name" %>
+    <%= f.input :tag_list, :label => 'Tags:' %>
+    <%= f.input :phone %>
+    <%= f.input :email %>
+    <%= f.input :website %>
+
+    <%= f.button :submit, :class => 'btn btn-large btn-success' %>
+
+<% end %>

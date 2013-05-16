@@ -1,0 +1,53 @@
+<form class="well span10">
+<p id="notice"><%= notice %></p>
+
+<h2><%= @venue.name %></h2>
+	<p><small><%= @venue.tag_list %></small></p>
+	<div class="row">
+		<div class="span4">
+			<b>Location: </b><p><%= @venue.location %></p>
+
+			<b>Description: </b><p><%= @venue.about %></p>
+
+			<b>Phone: </b><p><%= @venue.phone %></p>
+
+			<b>Website:</b> <p><%= @venue.website %></p>
+			<b>Manager: </b><p><%= @venue.manager %></p>
+		</div>
+
+		<div class="span6">
+			<p><%= image_tag @venue.avatar.thumb %></p>
+		</div>
+	</div>
+</form>
+
+<form class="well span10">
+	<h4>Contact <%= @venue.manager %></h4>
+  <div class="row">
+		<div class="span4">
+			<label>Full Name</label>
+			<input type="text" class="span3" placeholder="Your Name">
+			<label>Email Address</label>
+			<input type="text" class="span3" placeholder="Your email address">
+          	<label>Subject</label>
+			<select id="subject" name="subject" class="span3">
+				<option value="na" selected="">Choose One:</option>
+				<option value="booking">Bookings</option>
+				<option value="service">General Customer Service</option>
+			</select>
+		</div>
+		<div class="span5">
+			<label>Message</label>
+			<textarea name="message" id="message" class="input-xlarge span5" rows="10"></textarea>
+			<button type="submit" class="btn btn-primary">Send</button>
+		</div>
+	</div>
+
+<%= link_to 'Edit', edit_venue_path(@venue) %> |
+<%= link_to 'Back', venues_path %>
+</form>
+
+
+
+
+
