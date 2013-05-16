@@ -1,4 +1,6 @@
 Meetspace::Application.routes.draw do
+  resources :venue_locations
+
   resources :venues
 
 

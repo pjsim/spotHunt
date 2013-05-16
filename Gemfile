@@ -25,4 +25,8 @@ gem "binding_of_caller", ">= 0.7.1", :group => :development, :platforms => [:mri
 gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
 gem 'carrierwave'
 gem 'acts-as-taggable-on'
-gem 'rmagick'
+gem 'gmaps4rails'
+gem "geocoder"
+gem "nifty-generators"
+gem 'jquery-ui-rails'
+gem "mocha", :group => :test

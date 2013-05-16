@@ -1,0 +1,30 @@
+<% title "Venue Location" %>
+
+<p>
+  <strong>Address:</strong>
+  <%= @venue_location.address %>
+</p>
+<p>
+  <strong>Latitude:</strong>
+  <%= @venue_location.latitude %>
+</p>
+<p>
+  <strong>Longitude:</strong>
+  <%= @venue_location.longitude %>
+</p>
+
+<h4>Nearby Locations</h4>
+<ul>
+<% for venue_location in @venue_location.nearbys(10) %>
+  <li><%= link_to venue_location.address, venue_location %> (<%= venue_location.distance.round(2) %> miles)</li>
+<% end %>
+</ul>
+
+
+<p>
+  <%= link_to "Edit", edit_venue_location_path(@venue_location) %> |
+  <%= link_to "Destroy", @venue_location, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", venue_locations_path %>
+</p>
+
+<%= gmaps4rails(@json) %>
