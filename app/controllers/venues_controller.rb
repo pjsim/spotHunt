@@ -3,7 +3,7 @@ class VenuesController < ApplicationController
   # GET /venues.json
 
     # @venues = Venue.where(:user_id => current_user.id)
-    
+
   def index
     if params[:search].present?
       @search_location = Venue.create(:address => params[:search])

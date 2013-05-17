@@ -1,5 +1,5 @@
 class Venue < ActiveRecord::Base
-  attr_accessible :about, :email, :location, :manager, :name, :phone, 
+  attr_accessible :about, :email, :manager, :name, :phone, 
   :website, :avatar, :tag_list, :address, :latitude, :longitude, :gmaps
 
   belongs_to :user

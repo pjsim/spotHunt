@@ -15,9 +15,10 @@
 <div class="row">
 
 
+
 <div class="span7">
 
-<%= gmaps4rails(@json) %>
+<%= gmaps4rails(@json_all) %>
 
 </div>
 
@@ -26,6 +27,21 @@
 </div>
 
 <div class="span3">
+
+
+
+
+<% if @search_location %>
+  <ul>
+  <% for venue in @search_location.nearbys(10) %>
+    <li><%= link_to venue.name, venue %> (<%= venue.distance.round(2) %> miles)</li>
+  <% end %>
+  </ul>
+<% end %>
+
+
+
+
 
 <table>
   <tr>

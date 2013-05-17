@@ -1,23 +1,72 @@
 class VenueLocationsController < ApplicationController
+
   def index
+    @venue_locations = VenueLocation.all
     if params[:search].present?
-      @search_location = VenueLocation.create(:address => params[:search])
-      @venue_locations = VenueLocation.near(params[:search], params[:radius], :order => :distance)
-      @json = VenueLocation.near(params[:search], params[:radius], :order => :distance).to_gmaps4rails
+
+      @venues = Venue.near(params[:search], params[:radius], :order => :distance)
+      # @json = Venue.near(params[:search], params[:radius], :order => :distance).to_gmaps4rails
+
+      @json = Venue.near(params[:search], params[:radius], :order => :distance).to_gmaps4rails do |venue, marker|
+        marker.infowindow render_to_string(:partial => "/venue_locations/infowindow", :locals => { :venue => venue})
+        marker.title   "i'm the title"
+      end
+
+      @venueFirst = Venue.first
+      @venuesAll = Venue.all
+
+      @myArray = Array.new
+
+      @search_location = Venue.create(:address => params[:search])
+
+      @venuesAll.each do |venue|
+       @myA = @myArray.push(@search_location.distance_from(venue)) if @search_location.distance_from(venue) != 0.0
+      end
+      
+      @myAI = @myA.index(@myA.min)
+
+      @closestVenueName = @venuesAll[@myAI].name
+      @closestVenueAddress = @venuesAll[@myAI].address
+
+      @search_location.destroy
+      @new_search_location = Venue.create(:address => @closestVenueAddress)
+
+
+      @json_search = Venue.last.to_gmaps4rails do |venue, marker|
+        marker.picture({
+          :picture => "http://www.blankdots.com/img/github-32x32.png",
+          :width   => 32,
+          :height  => 32
+         })
+      end
+
+      @new_search_location.destroy
+
+      @json_all = @json
+
+
+
+
+
     else
-      @venue_locations = VenueLocation.all
-      @json = VenueLocation.all.to_gmaps4rails
+      @venues = Venue.all
+      # @json = Venue.all.to_gmaps4rails
+      @json = Venue.all.to_gmaps4rails do |venue, marker|
+      marker.infowindow render_to_string(:partial => "/venue_locations/infowindow", :locals => { :venue => venue})
+      marker.title   "i'm the title"
+      # marker.json({ :id => user.id, :foo => "bar" })
+      end
+      @json_all = @json
     end
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @venue_locations }
+      format.json { render json: @venues }
       if params[:search].present?
         @search_location.destroy
       end
     end
   end
-
   def show
     @venue_location = VenueLocation.find(params[:id])
     @json = VenueLocation.find(params[:id]).to_gmaps4rails
