@@ -1,5 +1,5 @@
-<h3>Users</h3>
 <div class="span8">
+<h3>Users</h3>
 <table class="table table-condensed">
   <thead>
     <tr>
@@ -23,6 +23,36 @@
         <%= render user %>
       </td>
       <td><%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+
+<div class="span8 row">
+<h3>Enquiries</h3>
+<table class="table table-condensed">
+  <thead>
+    <tr>
+      <% if !@enquirers.empty? %>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Subscribed</th>
+        <th></th>
+        <th></th>
+      <% else %>
+        <td>No enquiries</td>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+  <% @enquirers.each do |enquiry| %>
+    <tr>
+      <td><%= link_to enquiry.name, enquiry %></td>
+      <td><%= enquiry.email %></td>
+      <td><%= enquiry.created_at.to_date %></td>
+      <td>
+      <%= link_to("Delete", enquiry, :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
     </tr>
   <% end %>
   </tbody>

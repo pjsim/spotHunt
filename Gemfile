@@ -26,3 +26,4 @@ gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
 gem 'carrierwave'
 gem 'acts-as-taggable-on'
 gem 'rmagick'
+gem 'rails_autolink'
