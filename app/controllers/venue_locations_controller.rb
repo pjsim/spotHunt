@@ -7,7 +7,7 @@ class VenueLocationsController < ApplicationController
       @venues = Venue.near(params[:search], params[:radius], :order => :distance)
       # @json = Venue.near(params[:search], params[:radius], :order => :distance).to_gmaps4rails
 
-      @json = Venue.near(params[:search], params[:radius], :order => :distance).to_gmaps4rails do |venue, marker|
+      @jsonORIG = Venue.near(params[:search], params[:radius], :order => :distance).to_gmaps4rails do |venue, marker|
         marker.infowindow render_to_string(:partial => "/venue_locations/infowindow", :locals => { :venue => venue})
         marker.title   "i'm the title"
       end
@@ -31,6 +31,10 @@ class VenueLocationsController < ApplicationController
       @search_location.destroy
       @new_search_location = Venue.create(:address => @closestVenueAddress)
 
+      @json = Venue.near(@closestVenueAddress, 5, :order => :distance).to_gmaps4rails do |venue, marker|
+        marker.infowindow render_to_string(:partial => "/venue_locations/infowindow", :locals => { :venue => venue})
+        marker.title   "i'm the title"
+      end
 
       @json_search = Venue.last.to_gmaps4rails do |venue, marker|
         marker.picture({

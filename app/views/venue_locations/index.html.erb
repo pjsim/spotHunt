@@ -30,7 +30,7 @@
 
 
 
-
+<h5>Nearest venues to <%= params[:search] %>:</h5>
 <% if @search_location %>
   <ul>
   <% for venue in @search_location.nearbys(10) %>
