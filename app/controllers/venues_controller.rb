@@ -1,22 +1,46 @@
 class VenuesController < ApplicationController
   # GET /venues
   # GET /venues.json
-  def index
-    @venues = Venue.where(:user_id => current_user.id)
+
+    # @venues = Venue.where(:user_id => current_user.id)
     
+  def index
+    if params[:search].present?
+      @search_location = Venue.create(:address => params[:search])
+      @venues = Venue.near(params[:search], params[:radius], :order => :distance)
+      @json = Venue.near(params[:search], params[:radius], :order => :distance).to_gmaps4rails
+    else
+      @venues = Venue.all
+      @json = Venue.all.to_gmaps4rails
+    end
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @venues }
+      if params[:search].present?
+        @search_location.destroy
+      end
     end
   end
+  # # GET /venues/1
+  # # GET /venues/1.json
+  # def show
+  #   @venue = Venue.find(params[:id])
 
-  # GET /venues/1
-  # GET /venues/1.json
+  #   respond_to do |format|
+  #     format.html # show.html.erb
+  #     format.json { render json: @venue }
+  #   end
+  # end
+
+
+
   def show
     @venue = Venue.find(params[:id])
+    @json = Venue.find(params[:id]).to_gmaps4rails
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # index.html.erb
       format.json { render json: @venue }
     end
   end

@@ -25,7 +25,7 @@
         <p></p>
         <p>
           <i class="icon-user"></i> by <a href="#"><%= venue.manager %></a>
-          | <i class="icon-map-marker"></i> <%= venue.location %> 
+          | <i class="icon-map-marker"></i> <%= venue.address %> 
           | <i class="icon-globe"></i> <%= venue.website %>
           | <i class="icon-tags"></i> Tags : 
           <a href="#"><span class="label label-info"><%= venue.tag_list %></span></a> 
@@ -41,3 +41,5 @@
 
 <div class='btn btn-success'><%= link_to 'Add New Venue', new_venue_path %></div>
 </form>
+
+<%= gmaps4rails(@json) %>
