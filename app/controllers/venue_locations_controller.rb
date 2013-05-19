@@ -13,6 +13,7 @@ class VenueLocationsController < ApplicationController
       end
 
       @venueFirst = Venue.first
+
       @venuesAll = Venue.all
 
       @myArray = Array.new
@@ -29,14 +30,10 @@ class VenueLocationsController < ApplicationController
       @closestVenueAddress = @venuesAll[@myAI].address
 
       @search_location.destroy
+
       @new_search_location = Venue.create(:address => @closestVenueAddress)
 
-      @json = Venue.near(@closestVenueAddress, 5, :order => :distance).to_gmaps4rails do |venue, marker|
-        marker.infowindow render_to_string(:partial => "/venue_locations/infowindow", :locals => { :venue => venue})
-        marker.title   "i'm the title"
-      end
-
-      @json_search = Venue.last.to_gmaps4rails do |venue, marker|
+      Venue.last.to_gmaps4rails do |venue, marker|
         marker.picture({
           :picture => "http://www.blankdots.com/img/github-32x32.png",
           :width   => 32,
@@ -44,12 +41,25 @@ class VenueLocationsController < ApplicationController
          })
       end
 
+
+      @json = Venue.near(@closestVenueAddress, 5, :order => :distance).to_gmaps4rails do |venue, marker|
+        marker.infowindow render_to_string(:partial => "/venue_locations/infowindow", :locals => { :venue => venue})
+        marker.title   "i'm the title"
+      end
+
+      # @json_search = Venue.last.to_gmaps4rails do |venue, marker|
+      #   marker.picture({
+      #     :picture => "http://www.blankdots.com/img/github-32x32.png",
+      #     :width   => 32,
+      #     :height  => 32
+      #    })
+      # end
+
       @new_search_location.destroy
 
+      # need someway to combine @json and @json_search to get this working!!!!
+
       @json_all = @json
-
-
-
 
 
     else

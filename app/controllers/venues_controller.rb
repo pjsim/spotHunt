@@ -5,19 +5,17 @@ class VenuesController < ApplicationController
     # @venues = Venue.where(:user_id => current_user.id)
 
   def index
-<<<<<<< HEAD
+
+    @enquirers = Enquirer.all
+    @venues = Venue.where(:user_id => current_user.id)
     if params[:search].present?
       @search_location = Venue.create(:address => params[:search])
-      @venues = Venue.near(params[:search], params[:radius], :order => :distance)
+      #@venues = Venue.near(params[:search], params[:radius], :order => :distance)
       @json = Venue.near(params[:search], params[:radius], :order => :distance).to_gmaps4rails
     else
       @venues = Venue.all
       @json = Venue.all.to_gmaps4rails
     end
-=======
-    @venues = Venue.where(:user_id => current_user.id)
-    @enquirers = Enquirer.all
->>>>>>> upstream/master
 
     respond_to do |format|
       format.html # index.html.erb
