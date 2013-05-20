@@ -4,9 +4,6 @@ class VenueLocationsController < ApplicationController
     @venue_locations = VenueLocation.all
     if params[:search].present?
 
-      # @venues = Venue.near(params[:search], params[:radius], :order => :distance)
-      # @venueFirst = Venue.first
-
       @search_location = Venue.create(:address => params[:search])
 
       @venuesAll = Venue.all
@@ -42,8 +39,7 @@ class VenueLocationsController < ApplicationController
       # @json = Venue.all.to_gmaps4rails
       @json = Venue.all.to_gmaps4rails do |venue, marker|
       marker.infowindow render_to_string(:partial => "/venue_locations/infowindow", :locals => { :venue => venue})
-      marker.title   "i'm the title"
-      # marker.json({ :id => user.id, :foo => "bar" })
+      marker.title   "click me for info"
       end
 
     end

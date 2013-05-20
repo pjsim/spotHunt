@@ -8,13 +8,9 @@
           Search again <i class="icon-search icon-white"></i>
         <% end %>
       </div>
-      <br>
-      <br>
-
-          <%= text_field_tag :radius, params[:radius], :id => 'filtered-pop', :style => "float:left" %>Miles
-          <div id='population-range' style="width: 300px; float:right"></div>
-          <br>
-          <br>
+      <p>Expand your search radius (in miles..)</p>
+        <%= text_field_tag :radius, params[:radius], :id => 'filtered-pop', :style => "width: 30px" %>
+        <div id='population-range' style="width: 500px; float:right"></div>
     <% end %>
 
     <%= gmaps4rails(@json) %>
@@ -45,7 +41,7 @@
       };
 
       // $( "#filtered-pop" ).val(PopulationFilter.min)
-      $( "#filtered-pop" ).val("Expand your search radius")
+      $( "#filtered-pop" ).val(PopulationFilter.min)
       $("#population-range").slider({
         range: false,
         min: PopulationFilter.min,

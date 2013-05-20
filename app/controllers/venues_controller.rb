@@ -5,8 +5,7 @@ class VenuesController < ApplicationController
     # @venues = Venue.where(:user_id => current_user.id)
 
   def index
-
-
+    
     @enquirers = Enquirer.all
     @venues = Venue.where(:user_id => current_user.id)
     if params[:search].present?
