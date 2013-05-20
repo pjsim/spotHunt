@@ -1,15 +1,15 @@
 class VenueLocationsController < ApplicationController
 
   def index
-    @venue_locations = VenueLocation.all
+    @venues = Venue.paginate(:page => params[:page], :per_page => 6)
+
     if params[:search].present?
 
       @search_location = Venue.create(:address => params[:search])
-
-      @venuesAll = Venue.all
+      # @venuesAll = Venue.all
       @myArray = Array.new
 
-      @venuesAll.each do |venue|
+      @venues.each do |venue|
        @mySearchArray = @myArray.push(@search_location.distance_from(venue))
       end
       
@@ -19,8 +19,8 @@ class VenueLocationsController < ApplicationController
 
       @mySearchArrayIndex = @mySearchArray.index(@mySearchArray.min)
 
-      @closestVenueName = @venuesAll[@mySearchArrayIndex].name
-      @closestVenueAddress = @venuesAll[@mySearchArrayIndex].address
+      @closestVenueName = @venues[@mySearchArrayIndex].name
+      @closestVenueAddress = @venues[@mySearchArrayIndex].address
 
 
 
@@ -34,9 +34,10 @@ class VenueLocationsController < ApplicationController
         #  })
       end
 
+
+
     else
-      @venues = Venue.all
-      # @json = Venue.all.to_gmaps4rails
+
       @json = Venue.all.to_gmaps4rails do |venue, marker|
       marker.infowindow render_to_string(:partial => "/venue_locations/infowindow", :locals => { :venue => venue})
       marker.title   "click me for info"
@@ -51,7 +52,9 @@ class VenueLocationsController < ApplicationController
         @search_location.destroy
       end
     end
+
   end
+
   def show
     @venue_location = VenueLocation.find(params[:id])
     @json = VenueLocation.find(params[:id]).to_gmaps4rails

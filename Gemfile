@@ -31,4 +31,5 @@ gem "nifty-generators"
 gem 'jquery-ui-rails'
 # gem "mocha", :group => :test
 gem 'rails_autolink'
+gem 'will_paginate'
 

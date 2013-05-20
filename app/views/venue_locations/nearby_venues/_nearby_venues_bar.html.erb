@@ -1,6 +1,6 @@
 <% if params[:search] && params[:search] != "" %>
   <h5>Nearest venues to <%= params[:search] %>:</h5>
-    <% for venue in @search_location.nearbys(50000) %>
+    <% for venue in @search_location.nearbys(50000).paginate(:page => params[:page], :per_page => 6) %>
       <h4><%= link_to venue.name, venue %></h4>
       <% if venue.avatar? %>
         <a href="#" class="thumbnail">
@@ -40,5 +40,11 @@
       <% end %>
     </p>
   <% end %>
-
 <% end %>
+
+<div class="digg_pagination">
+  <%= will_paginate @venues, :container => false %>
+</div>
+<div class="page_info">
+  <%= page_entries_info @venues %>
+</div>
