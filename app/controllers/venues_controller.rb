@@ -3,7 +3,6 @@ class VenuesController < ApplicationController
   # GET /venues.json
   def index
     @venues = Venue.where(:user_id => current_user.id)
-    @enquirers = Enquirer.all
 
     respond_to do |format|
       format.html # index.html.erb
