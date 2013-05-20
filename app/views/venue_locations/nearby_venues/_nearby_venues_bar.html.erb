@@ -1,7 +1,6 @@
-
 <% if params[:search] && params[:search] != "" %>
   <h5>Nearest venues to <%= params[:search] %>:</h5>
-    <% for venue in @search_location.nearbys(1000) %>
+    <% for venue in @search_location.nearbys(50000) %>
       <h4><%= link_to venue.name, venue %></h4>
       <% if venue.avatar? %>
         <a href="#" class="thumbnail">
@@ -41,5 +40,5 @@
       <% end %>
     </p>
   <% end %>
-  
+
 <% end %>

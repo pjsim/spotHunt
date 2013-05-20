@@ -1,8 +1,6 @@
 <div class="row">
 
   <div class="span7">
-     
-        
     <%= form_tag venue_locations_path, :method => :get, :class => 'form-search search-bar' do %>
       <div class="input-append">
         <%= text_field_tag :search, params[:search], :class => 'search-query', :placeholder => 'Enter a suburb' %>
@@ -12,7 +10,6 @@
       </div>
       <br>
       <br>
-
 
           <%= text_field_tag :radius, params[:radius], :id => 'filtered-pop', :style => "float:left" %>Miles
           <div id='population-range' style="width: 300px; float:right"></div>
@@ -34,9 +31,6 @@
   </div>
 
 </div>
-
-
-
 
 
 
