@@ -10,12 +10,14 @@
   </tr>
 
 <% @enquirers.each do |enquirer| %>
+  <% if enquirer.recipient == current_user.id %>
   <tr>
     <td><%= enquirer.name %></td>
     <td><%= enquirer.email %></td>
     <td><%= link_to enquirer.message, enquirer %></td>
     <td><%= link_to 'Delete', enquirer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
+  <% end %>
 <% end %>
 </table>
 

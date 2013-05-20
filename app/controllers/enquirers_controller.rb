@@ -42,14 +42,14 @@ class EnquirersController < ApplicationController
   # POST /enquirers.json
   def create
     @enquirer = Enquirer.new(params[:enquirer])
-    @venue = Venue.find(params[:venue_id])
+
     respond_to do |format|
       if @enquirer.save
 
         EnquiryMailer.enquiry_email(@enquirer).deliver
 
-        format.html { redirect_to @venue, notice: 'Thank you! Your message has been sent.' }
-        format.json { render json: @enquirer, status: :created, location: @enquirer }
+        format.html { redirect_to root_path, notice: 'Thank you! Your message has been sent.' }
+        format.json { render json: root_path, status: :created, location: root_path }
       else
         format.html { render action: "new" }
         format.json { render json: @enquirer.errors, status: :unprocessable_entity }

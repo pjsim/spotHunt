@@ -6,6 +6,7 @@ class VenuesController < ApplicationController
 
   def index
 
+
     @enquirers = Enquirer.all
     @venues = Venue.where(:user_id => current_user.id)
     if params[:search].present?
@@ -16,6 +17,7 @@ class VenuesController < ApplicationController
       @venues = Venue.all
       @json = Venue.all.to_gmaps4rails
     end
+
 
     respond_to do |format|
       format.html # index.html.erb

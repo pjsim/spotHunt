@@ -62,7 +62,8 @@
 		</div>
 		<div class="span5">
 			<%= f.input :message, :input_html => { :rows => 10, :class => "span5"}, :required => true %>
-			<%= f.button :submit, :class =>'btn btn-primary' %>
+			<%= f.hidden_field 'recipient', :value => @venue.user_id %>
+			<%= f.button :submit, 'Send Message', :class =>'btn btn-primary' %>
 		</div>
 	</div>
 
