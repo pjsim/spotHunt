@@ -5,8 +5,8 @@ class HomeController < ApplicationController
     @venues = Venue.all
     if params[:search].present?
       @search_location = VenueLocation.create(:address => params[:search])
-      @venue_locations = VenueLocation.near(params[:search], params[:radius], :order => :distance)
-      @json = VenueLocation.near(params[:search], params[:radius], :order => :distance).to_gmaps4rails
+      @venue_locations = VenueLocation.near(params[:search], 1, :order => :distance)
+      @json = VenueLocation.near(params[:search], 1, :order => :distance).to_gmaps4rails
     else
       @venue_locations = VenueLocation.all
       @json = VenueLocation.all.to_gmaps4rails
