@@ -34,7 +34,7 @@
 
 			<b>Phone: </b><p><%= @venue.phone %></p>
 
-			<b>Website:</b> <p><%= auto_link @venue.website %></p>
+			<b>Website:</b> <p><%= auto_link(@venue.website, :all, :target => '_blank') %></p>
 			<b>Manager: </b><p><%= @venue.manager %></p>
 		</div>
 
@@ -71,13 +71,4 @@
 <%= link_to 'Edit', edit_venue_path(@venue) %> |
 <%= link_to 'Back', venues_path %>
 </form>
-
-
-
-
-
-
 </div>
-
-
-

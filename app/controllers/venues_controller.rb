@@ -1,12 +1,7 @@
 class VenuesController < ApplicationController
   # GET /venues
   # GET /venues.json
-
-    # @venues = Venue.where(:user_id => current_user.id)
-
   def index
-
-
     @enquirers = Enquirer.all
     @venues = Venue.where(:user_id => current_user.id)
     if params[:search].present?
@@ -27,18 +22,6 @@ class VenuesController < ApplicationController
       end
     end
   end
-  # # GET /venues/1
-  # # GET /venues/1.json
-  # def show
-  #   @venue = Venue.find(params[:id])
-
-  #   respond_to do |format|
-  #     format.html # show.html.erb
-  #     format.json { render json: @venue }
-  #   end
-  # end
-
-
 
   def show
     @venue = Venue.find(params[:id])

@@ -3,44 +3,30 @@ class VenueLocationsController < ApplicationController
   def index
     @venue_locations = VenueLocation.all
     if params[:search].present?
-
       # @venues = Venue.near(params[:search], params[:radius], :order => :distance)
-
       # @venueFirst = Venue.first
-
       @search_location = Venue.create(:address => params[:search])
-
       @venuesAll = Venue.all
       @myArray = Array.new
-
       @venuesAll.each do |venue|
-       @mySearchArray = @myArray.push(@search_location.distance_from(venue))
+      @mySearchArray = @myArray.push(@search_location.distance_from(venue))
       end
       
       @mySearchArrayIndex = @mySearchArray.index(@mySearchArray.min)
-
       @closestVenueName = @venuesAll[@mySearchArrayIndex].name
       @closestVenueAddress = @venuesAll[@mySearchArrayIndex].address
-
       @search_location.destroy
 
       @json = Venue.near(@closestVenueAddress, params[:radius], :order => :distance).to_gmaps4rails do |venue, marker|
         marker.infowindow render_to_string(:partial => "/venue_locations/infowindow", :locals => { :venue => venue})
         marker.title   "click me for info"
-        # marker.picture({
-        #   :picture => "http://www.blankdots.com/img/github-32x32.png",
-        #   :width   => 32,
-        #   :height  => 32
-        #  })
       end
 
     else
       @venues = Venue.all
-      # @json = Venue.all.to_gmaps4rails
       @json = Venue.all.to_gmaps4rails do |venue, marker|
       marker.infowindow render_to_string(:partial => "/venue_locations/infowindow", :locals => { :venue => venue})
       marker.title   "i'm the title"
-      # marker.json({ :id => user.id, :foo => "bar" })
       end
       @json_all = @json
     end
