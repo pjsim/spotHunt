@@ -15,7 +15,7 @@
 
 <h4>Nearby Locations</h4>
 <ul>
-<% for venue_location in @venue_location.nearbys(10) %>
+<% for venue_location in @venue_location.nearbys(100) %>
   <li><%= link_to venue_location.address, venue_location %> (<%= venue_location.distance.round(2) %> miles)</li>
 <% end %>
 </ul>

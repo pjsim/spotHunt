@@ -18,7 +18,7 @@
 
 <div class="span7">
 
-<%= gmaps4rails(@json_all) %>
+<%= gmaps4rails(@json) %>
 
 </div>
 
@@ -33,31 +33,12 @@
 <h5>Nearest venues to <%= params[:search] %>:</h5>
 <% if @search_location %>
   <ul>
-  <% for venue in @search_location.nearbys(10) %>
+  <% for venue in @search_location.nearbys(1000) %>
     <li><%= link_to venue.name, venue %> (<%= venue.distance.round(2) %> miles)</li>
   <% end %>
   </ul>
 <% end %>
 
-          <table>
-            <tr>
-              <th>Address</th>
-              <th>Latitude</th>
-              <th>Longitude</th>
-            </tr>
-            <% for venue_location in @venue_locations %>
-              <tr>
-                <td><%= venue_location.address %></td>
-                <td><%= venue_location.latitude %></td>
-                <td><%= venue_location.longitude %></td>
-                <td><%= link_to "Show", venue_location %></td>
-                <td><%= link_to "Edit", edit_venue_location_path(venue_location) %></td>
-                <td><%= link_to "Destroy", venue_location, :confirm => 'Are you sure?', :method => :delete %></td>
-              </tr>
-            <% end %>
-          </table>
-
-          <p><%= link_to "New Venu Location", new_venue_location_path %></p>
 
 </div>
 
