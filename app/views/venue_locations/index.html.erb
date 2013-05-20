@@ -1,59 +1,38 @@
-
-<div class ="row">
-  <div class = "span12">
-    <%= form_tag venue_locations_path, :method => :get do %>
-      <p>
-        <%= text_field_tag :search, params[:search], :class => 'search-query', :placeholder => 'Enter a suburb' %>
-        <%= text_field_tag :radius, params[:radius], :id => 'filtered-pop', :class => 'search-query' %>
-        <div id='population-range' style="width: 500px"></div>
-        <%= submit_tag "Search", :name => nil %>
-      </p>
-    <% end %>
-  </div>
-</div>
-
 <div class="row">
+
   <div class="span7">
+     
+        
+    <%= form_tag venue_locations_path, :method => :get, :class => 'form-search search-bar' do %>
+      <div class="input-append">
+        <%= text_field_tag :search, params[:search], :class => 'search-query', :placeholder => 'Enter a suburb' %>
+        <%= button_tag :class => "btn btn-primary" do %>
+          Search again <i class="icon-search icon-white"></i>
+        <% end %>
+      </div>
+      <br>
+      <br>
+
+
+          <%= text_field_tag :radius, params[:radius], :id => 'filtered-pop', :style => "float:left" %>Miles
+          <div id='population-range' style="width: 300px; float:right"></div>
+          <br>
+          <br>
+    <% end %>
+
     <%= gmaps4rails(@json) %>
+
   </div>
+
   <div class="span2">
   </div>
-  <div class="span3">
-    <h5>Nearest venues to <%= params[:search] %>:</h5>
-    <% if @search_location %>
-      <ul>
-      <% for venue in @search_location.nearbys(1000) %>
-        <div class="row">
-          <div class="span8">
-            <h4><%= link_to venue.name, venue %></h4>
-            <h6>(<%= venue.distance.round(2) %> miles)</h6> 
-          </div>
-        </div>
-        <div class="row">
-          <div class="span2">
-            <a href="#" class="thumbnail">
-              <%= image_tag venue.avatar.thumb %>
-            </a>
-          </div>
-        </div>
-        <div class="row">
-          <div class="span8">
-            <p>
-              <i class="icon-map-marker"></i> <%= venue.address %><br>
-              <% if venue.website? %>
-                <i class="icon-globe"></i> <%= auto_link venue.website %><br> 
-              <% end %>
-              <% if !venue.tag_list.empty? %>
-                <i class="icon-tags"></i> Tags : 
-                <a href="#"><span class="label label-info"><%= venue.tag_list %></span></a>
-              <% end %>
-            </p>
-          </div>
-        </div>
-      <% end %>
-      </ul>
-    <% end %>
+
+  <div class="span3" id="#venues_bar">
+
+    <%= render 'venue_locations/nearby_venues/nearby_venues_bar' %>
+
   </div>
+
 </div>
 
 
@@ -72,7 +51,7 @@
       };
 
       // $( "#filtered-pop" ).val(PopulationFilter.min)
-      $( "#filtered-pop" ).val("Enter radius in miles here..")
+      $( "#filtered-pop" ).val("Expand your search radius")
       $("#population-range").slider({
         range: false,
         min: PopulationFilter.min,
