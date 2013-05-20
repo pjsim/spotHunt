@@ -4,34 +4,27 @@ class VenueLocationsController < ApplicationController
     @venue_locations = VenueLocation.all
     if params[:search].present?
 
-      @venues = Venue.near(params[:search], params[:radius], :order => :distance)
-      # @json = Venue.near(params[:search], params[:radius], :order => :distance).to_gmaps4rails
+      # @venues = Venue.near(params[:search], params[:radius], :order => :distance)
 
-      @jsonORIG = Venue.near(params[:search], params[:radius], :order => :distance).to_gmaps4rails do |venue, marker|
-        marker.infowindow render_to_string(:partial => "/venue_locations/infowindow", :locals => { :venue => venue})
-        marker.title   "i'm the title"
-      end
-
-      @venueFirst = Venue.first
-
-      @venuesAll = Venue.all
-
-      @myArray = Array.new
+      # @venueFirst = Venue.first
 
       @search_location = Venue.create(:address => params[:search])
 
+      @venuesAll = Venue.all
+      @myArray = Array.new
+
       @venuesAll.each do |venue|
-       @myA = @myArray.push(@search_location.distance_from(venue)) if @search_location.distance_from(venue) != 0.0
+       @mySearchArray = @myArray.push(@search_location.distance_from(venue))
       end
       
-      @myAI = @myA.index(@myA.min)
+      @mySearchArrayIndex = @mySearchArray.index(@mySearchArray.min)
 
-      @closestVenueName = @venuesAll[@myAI].name
-      @closestVenueAddress = @venuesAll[@myAI].address
+      @closestVenueName = @venuesAll[@mySearchArrayIndex].name
+      @closestVenueAddress = @venuesAll[@mySearchArrayIndex].address
 
       @search_location.destroy
 
-      @json = Venue.near(@closestVenueAddress, 5, :order => :distance).to_gmaps4rails do |venue, marker|
+      @json = Venue.near(@closestVenueAddress, params[:radius], :order => :distance).to_gmaps4rails do |venue, marker|
         marker.infowindow render_to_string(:partial => "/venue_locations/infowindow", :locals => { :venue => venue})
         marker.title   "click me for info"
         # marker.picture({
