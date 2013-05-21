@@ -4,6 +4,11 @@
 	<h1 style="color: #F20C0C;">Find a Great Spot to <a href="http://australia.meetup.com/" target="_blank">Meetup</a></h1>
 	<br>
 	<%= render 'home/search' %>
+	<% if !user_signed_in? %>
+		<h2><%= link_to 'or put up your venue for meetups to find you', new_user_registration_path %></h2>
+	<% else %>
+		<h2><%= link_to 'or put up your venue for meetups to find you', new_venue_path %></h2>
+	<% end %>
 </div>
 
 

@@ -23,7 +23,7 @@
 <% else %>
   <h5>Venue List</h5>
   <% @venues.each do |venue| %>
-    <h4><%= link_to venue.name, venue %></h4>
+    <h4><%= link_to venue.name, venue, :style => 'color: #F20C0C;' %></h4>
     <% if venue.avatar? %>
       <a href="#" class="thumbnail">
         <%= image_tag venue.avatar.thumb %>
