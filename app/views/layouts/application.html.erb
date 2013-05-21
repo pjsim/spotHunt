@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Meetspace" %></title>
@@ -12,29 +11,22 @@
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
     <div class="navbar navbar-fixed-top navbar-inverse">
-
       <nav class="navbar-inner">
         <div class="container">
-
           <%= render 'layouts/navigation' %>
-
         </div>
       </nav>
     </div>
-
     <div id="main" role="main">
       <div class="container">
            <div class="row">
             <div class="span12">
-
               <%= render 'layouts/messages' %>
-
               <div id="container">
                 <% flash.each do |name, msg| %>
                   <%= content_tag :div, msg, :id => "flash_#{name}" %>
                 <% end %>
                 <%= content_tag :h1, yield(:title) if show_title? %>
-
                 <%= yield %>
              </div>
             </div>
@@ -43,8 +35,6 @@
           </footer>
       </div> <!--! end of .container -->
     </div> <!--! end of #main -->
-    
     <%= yield :scripts %>
-
   </body>
 </html>

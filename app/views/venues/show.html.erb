@@ -1,32 +1,9 @@
-<style type="text/css">
-
-.map_container {
-  padding: 6px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #ccc #ccc #999 #ccc;
-  -webkit-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
-  -moz-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
-  box-shadow: rgba(64, 64, 64, 0.1) 0 2px 5px;
-  width: 400px;
-
-}
-
-.gmaps4rails_map {
-  width: 400px;
-  height: 300px;
-
-}
-
-</style>
-
-
 <form class="well span10">
 <p id="notice"><%= notice %></p>
 
+	<h2><%= @venue.name %></h2>
 	<div class="row">
 		<div class="span5">
-			<h2><%= @venue.name %></h2>
 			<p><span class="label label-info"><%= @venue.tag_list %></span></p>
 			<b>Address: </b><p><%= @venue.address %></p>
 
@@ -39,17 +16,17 @@
 		</div>
 
 		<div class="span5">
-			<%= gmaps4rails(@json) %>
+			<% if @venue.avatar? %>
+			<p><%= image_tag @venue.avatar.thumb %></p>
+			<% end %>	
 		</div>
 	</div>
 </form>
 
-<div class="well span6">
-	<% if @venue.avatar? %>
-	<p><%= image_tag @venue.avatar.thumb %></p>
-	<% end %>
+<div class="well span10">
+	<%= gmaps4rails(@json) %>
 </div>
-
+<style>.map_container {width: 900px;} .gmaps4rails_map {width: 900px; height: 300px;}</style>
 
 <div class ="well span10">
 <%= simple_form_for(Enquirer.new) do |f| %>
@@ -68,7 +45,5 @@
 	</div>
 
 	<% end %>
-<%= link_to 'Edit', edit_venue_path(@venue) %> |
-<%= link_to 'Back', venues_path %>
 </form>
 </div>
