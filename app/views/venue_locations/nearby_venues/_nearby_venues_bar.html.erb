@@ -1,7 +1,7 @@
 <% if params[:search] && params[:search] != "" %>
   <h5>Nearest venues to <%= params[:search] %>:</h5>
     <% for venue in @search_location.nearbys(50000).paginate(:page => params[:page], :per_page => 6) %>
-      <h4><%= link_to venue.name, venue %></h4>
+      <h4><%= link_to venue.name, venue, :style => 'color: #F20C0C;' %></h4>
       <% if venue.avatar? %>
         <a href="#" class="thumbnail">
           <%= image_tag venue.avatar.thumb %>
@@ -42,9 +42,6 @@
   <% end %>
 <% end %>
 
-<div class="digg_pagination">
+<div class="flickr_pagination">
   <%= will_paginate @venues, :container => false, :params => { :my_excluded_param => nil } %>
-</div>
-<div class="page_info">
-  <%= page_entries_info @venues %>
 </div>

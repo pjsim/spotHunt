@@ -86,14 +86,14 @@
   .flickr_pagination .current {
     font-style: normal;
     font-weight: bold;
-    color: #ff0084; }
+    color: #F04D4D; }
   .flickr_pagination a {
     border: 1px solid #dddddd;
-    color: #0063dc;
+    color: #F20C0C;
     text-decoration: none; }
     .flickr_pagination a:hover, .flickr_pagination a:focus {
-      border-color: #003366;
-      background: #0063dc;
+      border-color: #8F0E0E;
+      background: #F20C0C;
       color: white; }
   .flickr_pagination .page_info {
     color: #aaaaaa;
