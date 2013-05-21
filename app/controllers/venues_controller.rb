@@ -3,10 +3,6 @@ class VenuesController < ApplicationController
   # GET /venues
   # GET /venues.json
   def index
-<<<<<<< HEAD
-=======
-    
->>>>>>> upstream/master
     @enquirers = Enquirer.all
     @venues = Venue.where(:user_id => current_user.id)
     if params[:search].present?

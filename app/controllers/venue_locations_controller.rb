@@ -1,44 +1,19 @@
 class VenueLocationsController < ApplicationController
 
   def index
-<<<<<<< HEAD
-    @venue_locations = VenueLocation.all
-    if params[:search].present?
-      # @venues = Venue.near(params[:search], params[:radius], :order => :distance)
-      # @venueFirst = Venue.first
-      @search_location = Venue.create(:address => params[:search])
-      @venuesAll = Venue.all
-      @myArray = Array.new
-      @venuesAll.each do |venue|
-      @mySearchArray = @myArray.push(@search_location.distance_from(venue))
-=======
     @venues = Venue.paginate(:page => params[:page], :per_page => 6)
 
     if params[:search].present?
-
       @search_location = Venue.create(:address => params[:search])
-
       @myArray = Array.new
-
       @venues.each do |venue|
-       @mySearchArray = @myArray.push(@search_location.distance_from(venue))
->>>>>>> upstream/master
+      @mySearchArray = @myArray.push(@search_location.distance_from(venue))
       end
 
       @mySearchArray.pop
-
-
       @mySearchArrayIndex = @mySearchArray.index(@mySearchArray.min)
-<<<<<<< HEAD
-      @closestVenueName = @venuesAll[@mySearchArrayIndex].name
-      @closestVenueAddress = @venuesAll[@mySearchArrayIndex].address
-=======
-
       @closestVenueName = @venues[@mySearchArrayIndex].name
       @closestVenueAddress = @venues[@mySearchArrayIndex].address
-
-
->>>>>>> upstream/master
       @json = Venue.near(@closestVenueAddress, params[:radius], :order => :distance).to_gmaps4rails do |venue, marker|
         marker.infowindow render_to_string(:partial => "/venue_locations/infowindow", :locals => { :venue => venue})
         marker.title   "click me for info"
@@ -47,17 +22,11 @@ class VenueLocationsController < ApplicationController
       @search_location.destroy
 
     else
-<<<<<<< HEAD
-      @venues = Venue.all
-      @json = Venue.all.to_gmaps4rails do |venue, marker|
-      marker.infowindow render_to_string(:partial => "/venue_locations/infowindow", :locals => { :venue => venue})
-      marker.title   "i'm the title"
-=======
 
       @json = Venue.all.to_gmaps4rails do |venue, marker|
       marker.infowindow render_to_string(:partial => "/venue_locations/infowindow", :locals => { :venue => venue})
       marker.title   "click me for info"
->>>>>>> upstream/master
+
       end
 
     end
