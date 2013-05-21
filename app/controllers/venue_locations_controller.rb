@@ -21,7 +21,8 @@ class VenueLocationsController < ApplicationController
       @closestVenueName = @venues[@mySearchArrayIndex].name
       @closestVenueAddress = @venues[@mySearchArrayIndex].address
 
-
+      @search_location.destroy
+      
       @json = Venue.near(@closestVenueAddress, params[:radius], :order => :distance).to_gmaps4rails do |venue, marker|
         marker.infowindow render_to_string(:partial => "/venue_locations/infowindow", :locals => { :venue => venue})
         marker.title   "click me for info"
@@ -32,7 +33,7 @@ class VenueLocationsController < ApplicationController
         #  })
       end
 
-      @search_location.destroy
+
 
     else
 
