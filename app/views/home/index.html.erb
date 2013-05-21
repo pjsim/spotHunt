@@ -2,17 +2,29 @@
 <h1>Find Great Venues near you</h1>
 <br>
 
+<<<<<<< HEAD
 <%= form_tag venue_locations_path, :method => :get, :class => 'form-search search-bar' do %>
 	<div class="input-append">
     <%= text_field_tag :search, params[:search], :class => 'search-query', :placeholder => 'Enter a suburb' %>
     <%= hidden_field_tag :radius, 5 %>
     <%= button_tag :class => "btn btn-primary" do %>
     	Find venues <i class="icon-search icon-white"></i>
+=======
+    <%= form_tag venue_locations_path, :method => :get, :class => 'form-search search-bar' do %>
+      <div class="input-append">
+        <%= text_field_tag :search, params[:search], :class => 'search-query', :placeholder => 'Enter a suburb' %>
+        <%= hidden_field_tag :radius, 1 %>
+        <%= button_tag :class => "btn btn-primary" do %>
+          Search again <i class="icon-search icon-white"></i>
+        <% end %>
+      </div>
+      <br>
+      <br>
+>>>>>>> upstream/master
     <% end %>
-	</div>
-	<% end %>
 
 </div>
+
 
 
 

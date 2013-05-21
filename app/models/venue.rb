@@ -14,7 +14,6 @@ class Venue < ActiveRecord::Base
 	def gmaps4rails_address
 		address
 	end
-
 	
   acts_as_taggable
   acts_as_taggable_on :tags

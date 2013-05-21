@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   def index
     @users = User.all
+<<<<<<< HEAD
 
     @venues = Venue.all
     if params[:search].present?
@@ -19,5 +20,7 @@ class HomeController < ApplicationController
         @search_location.destroy
       end
     end
+=======
+>>>>>>> upstream/master
   end
 end
