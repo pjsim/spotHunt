@@ -6,14 +6,13 @@ class VenueLocationsController < ApplicationController
     if params[:search].present?
 
       @search_location = Venue.create(:address => params[:search])
-      # @venuesAll = Venue.all
+
       @myArray = Array.new
 
       @venues.each do |venue|
        @mySearchArray = @myArray.push(@search_location.distance_from(venue))
       end
-      
-      @search_location.destroy
+
       @mySearchArray.pop
 
 
@@ -33,7 +32,7 @@ class VenueLocationsController < ApplicationController
         #  })
       end
 
-
+      @search_location.destroy
 
     else
 
