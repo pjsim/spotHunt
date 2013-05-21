@@ -10,10 +10,18 @@
 }
 .search-bar .search-query {
     height: 40px;
-    width: 600px;
+    width: 580px;
 }
 .search-bar .btn-primary {
     height: 50px;
+}
+
+.home {
+  background: url(venue3.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 /*body{
