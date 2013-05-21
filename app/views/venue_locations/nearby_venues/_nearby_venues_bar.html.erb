@@ -9,7 +9,7 @@
       <% end %>
       <p>
         <i class="icon-map-marker"></i> <%= venue.address %>
-        <small>(<%= venue.distance.round(2) %> miles)</small><br>
+        <small>(<%= venue.distance.to_f.round(2) %> miles)</small><br>
         <% if venue.website? %>
           <i class="icon-globe"></i> <%= auto_link venue.website %><br> 
         <% end %>
