@@ -2,11 +2,6 @@
   <h5>Nearest venues to <%= params[:search] %>:</h5>
     <% for venue in @search_location.nearbys(50000).paginate(:page => params[:page], :per_page => 6) %>
       <h4><%= link_to venue.name, venue %></h4>
-      <% if venue.avatar? %>
-        <a href="#" class="thumbnail">
-          <%= image_tag venue.avatar.thumb %>
-        </a>
-      <% end %>
       <p>
         <i class="icon-map-marker"></i> <%= venue.address %>
         <small>(<%= venue.distance.to_f.round(2) %> miles)</small><br>
@@ -24,11 +19,6 @@
   <h5>Venue List</h5>
   <% @venues.each do |venue| %>
     <h4><%= link_to venue.name, venue %></h4>
-    <% if venue.avatar? %>
-      <a href="#" class="thumbnail">
-        <%= image_tag venue.avatar.thumb %>
-      </a>
-    <% end %>
     <p>
       <i class="icon-map-marker"></i> <%= venue.address %><br>
       <% if venue.website? %>
@@ -39,12 +29,10 @@
         <a href="#"><span class="label label-info"><%= venue.tag_list %></span></a>
       <% end %>
     </p>
+    <hr>
   <% end %>
 <% end %>
 
-<div class="digg_pagination">
-  <%= will_paginate @venues, :container => false %>
-</div>
-<div class="page_info">
-  <%= page_entries_info @venues %>
+<div class="flickr_pagination">
+  <%= will_paginate @venues, :container => false, :params => { :my_excluded_param => nil } %>
 </div>

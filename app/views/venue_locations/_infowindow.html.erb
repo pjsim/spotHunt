@@ -1,7 +1,4 @@
 <h4><%= link_to venue.name, venue_path(venue) %></h4>
 <h6><%= venue.address %></h6>
-<% if venue.avatar? %>
-	<%= image_tag venue.avatar.thumb %>
-<% end %>
 <h6><%= venue.phone %></h6>
 <h6><%= auto_link venue.website %></h6>
