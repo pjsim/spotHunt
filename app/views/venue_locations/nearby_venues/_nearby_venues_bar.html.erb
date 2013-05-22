@@ -1,7 +1,16 @@
 <% if params[:search] && params[:search] != "" %>
   <h5>Nearest venues to <%= params[:search] %>:</h5>
     <% for venue in @search_location.nearbys(50000).paginate(:page => params[:page], :per_page => 6) %>
+
+    <div class="pull-right">
+      <%= form_tag directions_path, :method => :get do %>
+      <%= hidden_field_tag :search, params[:search], :class => 'search-query', :placeholder => 'Enter a suburb' %>
+      <%= hidden_field_tag :venue_address, venue.address, :class => 'search-query', :placeholder => 'Enter a suburb' %>
+      <%= button_tag "Directions", :class => 'btn btn-mini btn-primary' %>
+    </div>
+
       <h4><%= link_to venue.name, venue %></h4>
+      
       <p>
         <i class="icon-map-marker"></i> <%= venue.address %>
         <small>(<%= venue.distance.to_f.round(2) %> miles)</small><br>
@@ -13,6 +22,8 @@
           <span class="label label-info"><%= venue.tag_list %></span>
         <% end %>
       </p>
+        <% end %>
+
     <% end %>
 
 <% else %>

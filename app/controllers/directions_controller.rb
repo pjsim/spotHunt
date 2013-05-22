@@ -1,12 +1,12 @@
-class VenueLocationsController < ApplicationController
-
-  def index
+class DirectionsController < ApplicationController
+	def index
     @venues = Venue.paginate(:page => params[:page], :per_page => 6)
 
     if params[:search].present?
       @venuesAll = Venue.all
 
       @search_location = Venue.create(:address => params[:search])
+
       @myArray = Array.new
 
       @venuesAll.each do |venue|
@@ -25,13 +25,17 @@ class VenueLocationsController < ApplicationController
       @json = Venue.near(@closestVenueAddress, params[:radius], :order => :distance).to_gmaps4rails do |venue, marker|
         marker.infowindow render_to_string(:partial => "/venue_locations/infowindow", :locals => { :venue => venue})
         marker.title   "click me for info"
+        # marker.picture({
+        #   :picture => "http://www.blankdots.com/img/github-32x32.png",
+        #   :width   => 32,
+        #   :height  => 32
+        #  })
       end
     else
       
       @json = Venue.all.to_gmaps4rails do |venue, marker|
       marker.infowindow render_to_string(:partial => "/venue_locations/infowindow", :locals => { :venue => venue})
       marker.title   "click me for info"
-
       end
     end
 

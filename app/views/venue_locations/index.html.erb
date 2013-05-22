@@ -1,51 +1,14 @@
-<div class="row-fluid">
-  <div class="container">
-  <div class="span7">
-    <%= render 'home/search' %>
-    <%= gmaps4rails(@json) %>
-  </div>
-  <div class="span3 offset2" id="#venues_bar">
-    <%= render 'venue_locations/nearby_venues/nearby_venues_bar' %>
+<div class="well">
+  <div class="row-fluid">
+    <div class="container">
+    <div class="span6">
+      <%= render 'home/search' %>
+      <%= render 'venue_locations/gmaps' %>
+    </div>
+    <div class="span4 offset2" id="#venues_bar">
+      <%= render 'venue_locations/nearby_venues/nearby_venues_bar' %>
+      </div>
     </div>
   </div>
 </div>
 
-<script type="text/javascript">
-  $(document).ready(function() {
-    Gmaps.map.callback = function() {
-      var PopulationFilter = {
-        min: 1
-      };
-
-      // $( "#filtered-pop" ).val(PopulationFilter.min)
-      $( "#filtered-pop" ).val(PopulationFilter.min)
-      $("#population-range").slider({
-        range: false,
-        min: PopulationFilter.min,
-        values: [PopulationFilter.min],
-        slide: function(event, ui) {
-          $( "#filtered-pop" ).val(ui.values[ 0 ])
-          PopulationFilter.min = ui.values[ 0 ]
-          PopulationFilter.max = ui.values[ 1 ]
-          applyFilters()
-        }
-      });
-
-      var VisibleMarkers = function() {
-      var filtered = _.reject(Gmaps.map.markers, function(marker) {
-          return marker.population < PopulationFilter.min || marker.population > PopulationFilter.max;
-        });
-        return filtered
-       }
-
-      var applyFilters = function() {
-        _.each(Gmaps.map.markers, function(marker) {
-          Gmaps.map.hideMarker(marker)
-        })
-        _.each(VisibleMarkers(), function(marker) {
-          Gmaps.map.showMarker(marker)
-        })
-      };
-   }
-});
-</script>
