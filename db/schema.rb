@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130517084010) do
+ActiveRecord::Schema.define(:version => 20130522015445) do
 
   create_table "enquirers", :force => true do |t|
     t.string   "name"
@@ -21,6 +21,17 @@ ActiveRecord::Schema.define(:version => 20130517084010) do
     t.datetime "updated_at", :null => false
     t.integer  "recipient"
   end
+
+  create_table "friendly_id_slugs", :force => true do |t|
+    t.string   "slug",                         :null => false
+    t.integer  "sluggable_id",                 :null => false
+    t.string   "sluggable_type", :limit => 40
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], :name => "index_friendly_id_slugs_on_slug_and_sluggable_type", :unique => true
+  add_index "friendly_id_slugs", ["sluggable_id"], :name => "index_friendly_id_slugs_on_sluggable_id"
+  add_index "friendly_id_slugs", ["sluggable_type"], :name => "index_friendly_id_slugs_on_sluggable_type"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -100,8 +111,10 @@ ActiveRecord::Schema.define(:version => 20130517084010) do
     t.float    "latitude"
     t.float    "longitude"
     t.boolean  "gmaps"
+    t.string   "slug"
   end
 
+  add_index "venues", ["slug"], :name => "index_venues_on_slug", :unique => true
   add_index "venues", ["user_id"], :name => "index_venues_on_user_id"
 
 end

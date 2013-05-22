@@ -28,6 +28,10 @@ class VenuesController < ApplicationController
     @venue = Venue.find(params[:id])
     @json = Venue.find(params[:id]).to_gmaps4rails
 
+    if request.path != venue_path(@venue)
+      redirect_to @venue, :status => :moved_permanently
+    end
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @venue }

@@ -1,4 +1,8 @@
 class Venue < ActiveRecord::Base
+
+  extend FriendlyId
+  friendly_id :name, :use => [:slugged, :history]
+
   attr_accessible :about, :email, :manager, :name, :phone, 
   :website, :avatar, :tag_list, :address, :latitude, :longitude, :gmaps
 
@@ -19,4 +23,5 @@ class Venue < ActiveRecord::Base
   acts_as_taggable_on :tags
 
   mount_uploader :avatar, AvatarUploader
+
 end

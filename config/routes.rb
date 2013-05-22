@@ -1,13 +1,13 @@
 Meetspace::Application.routes.draw do
 
-  resources :venue_locations
+  resources :venue_locations, :path => "map"
 
   resources :venues
 
   get "list/index", :id => "list"
-  match "list" => "list#index"
+  match "list" => "list#index", :path => "all-venues"
 
-  resources :enquirers
+  resources :enquirers, :path => "inbox"
 
   authenticated :user do
     root :to => 'home#index'
