@@ -4,6 +4,8 @@ Meetspace::Application.routes.draw do
 
   resources :venues
 
+  resources :directions
+
   get "list/index", :id => "list"
   match "list" => "list#index"
 

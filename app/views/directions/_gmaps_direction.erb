@@ -1,0 +1,3 @@
+    <%= gmaps({
+       "direction"   => { "data" => { "from" => @search_location.address, "to" => params[:venue_address] } }
+            }) %>

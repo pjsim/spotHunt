@@ -1,6 +1,5 @@
-class VenueLocationsController < ApplicationController
-
-  def index
+class DirectionsController < ApplicationController
+	def index
     @venues = Venue.paginate(:page => params[:page], :per_page => 6)
 
     if params[:search].present?
