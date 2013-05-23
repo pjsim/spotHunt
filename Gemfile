@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.13'
 gem 'sqlite3', :group => [:development, :test]
 group :production do
-  gem 'pg'
+	gem 'mysql2'
 end
 gem 'sass-rails',   '~> 3.2.3'
 group :assets do

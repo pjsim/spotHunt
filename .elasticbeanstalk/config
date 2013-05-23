@@ -1,0 +1,14 @@
+[global]
+ApplicationName=spotHunt
+AwsCredentialFile=C:\Users\Phillip Simmonds\.elasticbeanstalk\aws_credential_file
+DevToolsEndpoint=git.elasticbeanstalk.ap-southeast-2.amazonaws.com
+EnvironmentName=spotHunt-env
+InstanceProfileName=aws-elasticbeanstalk-ec2-role
+OptionSettingFile=C:\Users\Phillip Simmonds\Desktop\RoR\spotHunt\.elasticbeanstalk\optionsettings.spotHunt-env
+RdsDeletionPolicy=Delete
+RdsEnabled=Yes
+RdsSourceSnapshotName=
+Region=ap-southeast-2
+ServiceEndpoint=https://elasticbeanstalk.ap-southeast-2.amazonaws.com
+SolutionStack=64bit Amazon Linux running Ruby 1.9.3
+
