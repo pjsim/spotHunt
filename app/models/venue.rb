@@ -10,6 +10,9 @@ class Venue < ActiveRecord::Base
 
   has_one :venue_location
 
+  validates :name, :address, :presence => true
+  validates :address, :uniqueness => true
+
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?
 
