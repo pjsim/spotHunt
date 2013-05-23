@@ -11,9 +11,11 @@
     </div>
     <div class="row">
       <div class="span2">
-        <div class="thumbnail">
-            <%= image_tag venue.avatar.thumb %>
-        </div>
+        <% if venue.avatart? %>
+          <div class="thumbnail">
+              <%= image_tag venue.avatar.thumb %>
+          </div>
+        <% end %>
       </div>
       <div class="span6"> 
         <p><%= venue.about %></p>     
