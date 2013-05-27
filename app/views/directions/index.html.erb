@@ -1,11 +1,15 @@
-<div class="row-fluid">
-  <div class="container">
-  <div class="span6">
-    <%= render 'home/search' %>
-	<%= render 'directions/gmaps_direction' %>
-  </div>
-  <div class="span4 offset2" id="#venues_bar">
-    <%= render 'venue_locations/nearby_venues/nearby_venues_bar' %>
-    </div>
-  </div>
+<div class="well">
+	<div class="row-fluid">
+	  <div class="container">
+	  	<div class="span6">
+	    	<%= render 'home/search' %>
+			<%= render 'directions/gmaps_direction' %>
+	  	</div>
+	  	<div class="span3 offset2" id="#venues_bar">
+	    	<%= render 'venue_locations/nearby_venues/nearby_venues_bar' %>
+	    </div>
+	   	<div class="span1">
+	    </div>
+	  </div>
+	</div>
 </div>
